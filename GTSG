@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+# Author:
+# Dr. Kun Yin (Email: yinkun [at] cdut.edu.cn)
+
+# Description:
+# Derivation of melting curve from Gibbs thermodynamic surface for davemaoite.
+
+# How to run:
+# Execute./GTSG in the terminal.
+
+# Requirement:
+# Python3 (with numpy, scipy, matplotlib packages installed)
+
+# Input:
+# solid_input.txt, liquid_input.txt
+# The above two files contain volume (given by lattice ratio
+# with respect to a given basis), pressure, energy and temperature data
+# which are computed from NVT-ensemble FPMD simulations for solid phase
+# and liquid phase, respectively.
+
+# Output:
+# kechin_fit_params_with_units.txt
+# Parameters of Kechin equation after fitting are given in this file.
+# kechin_fit.pdf
+# A figure shows the fitted melting curve in pressure-temperature diagram.
+
+cat <<EOF
+**************************************
+Gibbs Thermodynamic Surface Generator
+      _____ _______ _____  _____ 
+     / ____|__   __/ ____|/ ____|
+    | |  __   | | | (___ | |  __ 
+    | | |_ |  | |  \___ \| | |_ |
+    | |__| |  | |  ____) | |__| |
+     \_____|  |_| |_____/ \_____|
+           a raw version
+**************************************
+EOF
+
+echo -n "calculating primitive surface for solid phase..."
+bash run_onephase.sh solid
+echo "done"
+
+echo -n "calculating primitive surface for liquid phase..."
+bash run_onephase.sh liquid
+echo "done"
+
+echo -n "calculating derived surface for two phases..."
+bash run_twophase.sh
+echo "done"
+
+echo -n "generating output..."
+bash get_output.sh
+echo "done"
+
+echo -n "cleaning temporary folders..."
+#bash clean_temp.sh
+echo "done"
