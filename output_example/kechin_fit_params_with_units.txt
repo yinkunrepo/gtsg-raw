@@ -1,0 +1,5 @@
+T0 = 4020 (K)
+P0 = 24.6 (GPa)
+a = 14.9 (GPa)
+b = 0.324 (dimensionless)
+c = 2.61e+03 (GPa)

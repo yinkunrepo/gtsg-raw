@@ -55,5 +55,5 @@ bash get_output.sh
 echo "done"
 
 echo -n "cleaning temporary folders..."
-#bash clean_temp.sh
+bash clean_temp.sh
 echo "done"
